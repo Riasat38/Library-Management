@@ -21,3 +21,8 @@ def get_db():
         yield db
     finally:
         db.close()
+    
+def create_tables():
+    # import here so all models are registered on Base before create_all runs
+    from app.models.db_models import BookDB, MemberDB, BorrowDB  # noqa: F401
+    Base.metadata.create_all(bind=engine)
